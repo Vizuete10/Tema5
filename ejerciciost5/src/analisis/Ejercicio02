@@ -1,0 +1,105 @@
+================================================================================
+  ANÁLISIS Y DISEÑO - EJERCICIO 2 - Biblioteca
+================================================================================
+
+1. ANÁLISIS
+
+SUPERCLASE: Ficha  {abstract}
+  Atributos (protected):
+    - id     : int
+    - titulo : String
+
+  Constructores:
+    1. Ficha(id, titulo)
+
+  Métodos:
+    - getId() / getTitulo()
+    - setTitulo(String) : void
+    - prestar()   : int   {abstract}  → devuelve días de préstamo
+    - equals()    : boolean           → iguales si mismo id
+    - toString()  : String {abstract}
+
+  Días de préstamo:
+    Libro   → 15 días
+    Revista → 10 días
+    DVD     →  5 días
+
+
+SUBCLASE: Libro  extends  Ficha
+  Atributos:
+    - autor     : String
+    - editorial : String
+
+  Constructores:
+    1. Libro(id, titulo, autor, editorial)
+
+  Métodos:
+    - getAutor() / getEditorial()
+    - setAutor() / setEditorial()
+    - prestar() : int  → return 15
+    - toString() : String
+
+
+SUBCLASE: Revista  extends  Ficha
+  Atributos:
+    - numRevista : int
+    - anio       : int
+
+  Constructores:
+    1. Revista(id, titulo, numRevista, anio)
+
+  Métodos:
+    - getNumRevista() / getAnio()
+    - setAnio() : void
+    - prestar() : int  → return 10
+    - toString() : String
+
+
+SUBCLASE: DVD  extends  Ficha
+  Atributos:
+    - director : String
+    - anio     : int
+    - tipo     : String  ("pelicula", "documental" o "serie")
+
+  Restricciones:
+    - tipo válido: "pelicula", "documental", "serie"
+    - Si no válido → "pelicula"
+
+  Constructores:
+    1. DVD(id, titulo, director, anio, tipo)
+
+  Métodos:
+    - comprobarTipo(String) : String  privado
+    - getDirector() / getAnio() / getTipo()
+    - setTipo(String) : void
+    - prestar() : int  → return 5
+    - toString() : String
+
+
+CLASE EJECUTABLE: MainBiblioteca
+  - Crea una List<Ficha> con distintos objetos
+  - Muestra cada ficha y sus días de préstamo
+
+
+2. DISEÑO
+
+-----------------------------------------------------------
+│                    Ficha  {abstract}                    │
+-----------------------------------------------------------
+│ # id     : int                                          │
+│ # titulo : String                                       │
+-----------------------------------------------------------
+│ + Ficha(id: int, titulo: String)                        │
+│ + getId()           : int                               │
+│ + getTitulo()       : String                            │
+│ + setTitulo(String) : void                              │
+│ + prestar()         : int     {abstract}                │
+│ + equals(Object)    : boolean                           │
+│ + toString()        : String  {abstract}                │
+-----------------------------------------------------------
+                ^
+    ┌───────────┼───────────┐
+    │           │           │
+---------   ---------   ---------
+│ Libro │   │Revista│   │  DVD  │
+---------   ---------   ---------

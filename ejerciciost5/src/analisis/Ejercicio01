@@ -1,0 +1,126 @@
+================================================================================
+  ANÁLISIS Y DISEÑO - EJERCICIO 1 - Vehículos
+================================================================================
+
+1. ANÁLISIS
+
+SUPERCLASE: Vehiculo
+  Atributos (protected, heredables):
+    - marca           : String
+    - modelo          : String
+    - color           : String
+    - matricula       : String
+    - motorEncendido  : boolean  (por defecto false)
+    - marchaActual    : int      (por defecto 0 → punto muerto)
+    - velocidadActual : int      (por defecto 0)
+
+  Valores por defecto:
+    - motorEncendido  = false
+    - marchaActual    = 0
+    - velocidadActual = 0
+
+  Constructores:
+    1. Vehiculo(marca, modelo, color, matricula)
+
+  Métodos:
+    - arrancar()      : void  → motorEncendido = true  (solo si está parado)
+    - parar()         : void  → velocidad = 0, marcha = 0, motor = false
+    - subirMarcha()   : void  → marchaActual++ si no es 5ª
+    - bajarMarcha()   : void  → marchaActual-- si no es punto muerto
+    - acelerar(int)   : void  → sube velocidad y ajusta marcha según rango
+    - desacelerar(int): void  → baja velocidad y ajusta marcha según rango
+    - getMarchaSegunVelocidad() : int   privado, calcula marcha según velocidad
+    - getters de todos los atributos
+    - equals(Object)  : boolean
+    - toString()      : String {abstract}
+
+  Rangos de marcha:
+    1ª:  0  – 29 km/h
+    2ª: 30  – 49 km/h
+    3ª: 50  – 69 km/h
+    4ª: 70  – 99 km/h
+    5ª: 100+    km/h
+
+
+SUBCLASE: Turismo  extends  Vehiculo
+  Atributos propios:
+    - numPlazas : int
+    - tipoUso   : String  ("particular" o "profesional", por defecto "particular")
+
+  Restricciones:
+    - tipoUso válido: "particular" o "profesional"
+    - Si no es válido → "particular"
+
+  Constructores:
+    1. Turismo(marca, modelo, color, matricula, numPlazas, tipoUso)
+
+  Métodos:
+    - comprobarTipoUso(String) : String  privado, valida el tipo
+    - getNumPlazas() / getTipoUso()
+    - setTipoUso(String): void
+    - toString() : String
+
+
+SUBCLASE: Camion  extends  Vehiculo
+  Atributos propios:
+    - pesoMaximo      : double
+    - mercPeligrosa   : boolean
+
+  Constructores:
+    1. Camion(marca, modelo, color, matricula, pesoMaximo, mercPeligrosa)
+
+  Métodos:
+    - getPesoMaximo() / isMercPeligrosa()
+    - setPesoMaximo() / setMercPeligrosa()
+    - toString() : String
+
+
+SUBCLASE: Motocicleta  extends  Vehiculo
+  Atributos propios:
+    - cilindrada : int
+
+  Constructores:
+    1. Motocicleta(marca, modelo, color, matricula, cilindrada)
+
+  Métodos:
+    - requiereCarnet() : boolean  → cilindrada >= 125
+    - getCilindrada() / setCilindrada()
+    - toString() : String
+
+
+CLASE EJECUTABLE: MainVehiculo
+  - Pide velocidad objetivo y tiempo de espera por teclado
+  - Simula: reposo → arrancar → acelerar → mantener → desacelerar → parar
+
+
+2. DISEÑO
+
+-----------------------------------------------------------
+│                      Vehiculo  {abstract}               │
+-----------------------------------------------------------
+│ # marca           : String                              │
+│ # modelo          : String                              │
+│ # color           : String                              │
+│ # matricula       : String                              │
+│ # motorEncendido  : boolean                             │
+│ # marchaActual    : int                                 │
+│ # velocidadActual : int                                 │
+-----------------------------------------------------------
+│ + Vehiculo(marca, modelo, color, matricula)             │
+│ + arrancar()          : void                            │
+│ + parar()             : void                            │
+│ + subirMarcha()       : void                            │
+│ + bajarMarcha()       : void                            │
+│ + acelerar(km: int)   : void                            │
+│ + desacelerar(km: int): void                            │
+│ - getMarchaSegunVelocidad() : int                       │
+│ + getters...                                            │
+│ + equals(Object)      : boolean                         │
+│ + toString()          : String  {abstract}              │
+-----------------------------------------------------------
+                ^
+    ┌───────────┼────────────┐
+    │           │            │
+-----------  ----------  --------------
+│ Turismo │  │ Camion  │  │Motocicleta│
+-----------  ----------  --------------

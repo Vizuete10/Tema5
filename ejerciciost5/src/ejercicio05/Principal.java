@@ -79,7 +79,7 @@ public class Principal {
             return;
         }
         
-        System.out.println("          LISTA DE POLÍGONOS (" + lista.size() + ")");
+        System.out.println("LISTA DE POLÍGONOS (" + lista.size() + ")");
         
         for (Poligono p : lista) {
             System.out.println(p.toString());

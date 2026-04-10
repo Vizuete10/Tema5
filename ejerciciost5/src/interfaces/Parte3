@@ -1,0 +1,69 @@
+Parte 1
+Sustantivos → Clases / Atributos
+
+Vivir (interfaz), AnimalDomestico, Perro, Gato
+Atributos: nombre, raza, peso, color
+
+Verbos → Métodos
+
+comer, dormir, hacerRuido, vacunar, hacerCaso, sacarPaseo, toserBolaPelo
+
+Parte 2
+¿Perro es un tipo de AnimalDomestico?  → SÍ ✔
+¿Gato  es un tipo de AnimalDomestico?  → SÍ ✔
+
+<<interface>> Vivir
+      ↑ implements
+<<abstract>> AnimalDomestico
+      ↑ hereda
+   ┌──┴──┐
+ Perro   Gato
+ 
+ Parte 3
+ - - - - - - - - - - - - - - - - - - - - -
+<<interface>> Vivir
+- - - - - - - - - - - - - - - - - - - - -
++ comer()     : void
++ dormir()    : void
++ hacerRuido(): void
+- - - - - - - - - - - - - - - - - - - - -
+
+              ↑ implements
+
+- - - - - - - - - - - - - - - - - - - - -
+<<abstract>> AnimalDomestico
+- - - - - - - - - - - - - - - - - - - - -
+# nombre : String
+# raza   : String
+# peso   : double
+# color  : String
+- - - - - - - - - - - - - - - - - - - - -
++ AnimalDomestico(nombre, raza, peso, color)
++ getNombre() : String
++ getRaza()   : String
++ getPeso()   : double
++ getColor()  : String
++ setNombre(nombre : String) : void
++ setPeso(peso : double)     : void
++ comer()     : void
++ dormir()    : void
++ vacunar()   : void
++ hacerRuido(): void  {abstract}
++ hacerCaso() : boolean {abstract}
++ equals(Object) : boolean
++ toString()  : String
+- - - - - - - - - - - - - - - - - - - - -
+
+               ↑ hereda  
+               
+- - - - - - - - -    - - - - - - - - -
+Perro                Gato
+- - - - - - - - -    - - - - - - - - -
+(sin atrib. extra)   (sin atrib. extra)
+- - - - - - - - -    - - - - - - - - -
++ Perro(...)         + Gato(...)
++ hacerRuido(): void + hacerRuido(): void
++ hacerCaso() :bool  + hacerCaso() :bool
++ sacarPaseo(): void + toserBolaPelo(): void
++ toString()         + toString()
+- - - - - - - - -    - - - - - - - - -
